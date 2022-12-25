@@ -8,7 +8,7 @@ using OpenTelemetry.Resources;
 using Serilog;
 
 var resource = ResourceBuilder.CreateDefault().AddService(serviceName: "Sample metrics service");
-var meterName = "Aleksei's meter";
+const string meterName = "Aleksei's meter";
 var meter = new Meter(name: meterName, version: "1.0"); // Think of a meter as of a container for all of your metrics
 var counter = meter.CreateCounter<long>(name: "Requests");
 var histogram = meter.CreateHistogram<long>(name: "RequestDuration");
@@ -22,12 +22,15 @@ var services = builder.Services;
 services.AddControllers();
 // services.AddHostedService<SampleBackgroundService>();
 
-services.AddOpenTelemetry().WithMetrics(x =>
-{
-    x.SetResourceBuilder(resource);
-    x.AddConsoleExporter();
-    x.AddMeter(meterName);
-}).StartWithHost();
+services
+    .AddOpenTelemetry()
+    .WithMetrics(x =>
+    {
+        x.SetResourceBuilder(resource);
+        x.AddConsoleExporter();
+        x.AddMeter(meterName);
+    })
+    .StartWithHost(); // Requires OpenTelemetry.Extensions.Hosting package
 
 var app = builder.Build();
 
