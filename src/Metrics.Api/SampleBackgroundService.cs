@@ -21,7 +21,7 @@ public class SampleBackgroundService : BackgroundService
         {
             _logger.LogInformation("Processing data. Current date: {Date}", DateTime.UtcNow);
 
-            await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
         }
     }
 }
