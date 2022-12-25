@@ -7,7 +7,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using Serilog;
 
-var resource = ResourceBuilder.CreateDefault().AddService(serviceName: "Sample metrics service");
+var resourceBuilder = ResourceBuilder.CreateDefault().AddService(serviceName: "Sample metrics service");
 const string meterName = "Aleksei's meter";
 var meter = new Meter(name: meterName, version: "1.0"); // Think of a meter as of a container for all of your metrics
 var counter = meter.CreateCounter<long>(name: "Requests");
@@ -26,7 +26,7 @@ services
     .AddOpenTelemetry()
     .WithMetrics(x =>
     {
-        x.SetResourceBuilder(resource);
+        x.SetResourceBuilder(resourceBuilder);
         x.AddConsoleExporter();
         x.AddMeter(meterName);
         x.AddRuntimeInstrumentation(); // Requires OpenTelemetry.Instrumentation.Runtime package
