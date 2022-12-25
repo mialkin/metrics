@@ -27,9 +27,10 @@ services
     .WithMetrics(x =>
     {
         x.SetResourceBuilder(resourceBuilder);
-        x.AddConsoleExporter();
+        x.AddConsoleExporter(); // Requires OpenTelemetry.Exporter.Console package
+        x.AddPrometheusExporter(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
         x.AddMeter(meterName);
-        x.AddRuntimeInstrumentation(); // Requires OpenTelemetry.Instrumentation.Runtime package
+        // x.AddRuntimeInstrumentation(); // Requires OpenTelemetry.Instrumentation.Runtime package
     })
     .StartWithHost(); // Requires OpenTelemetry.Extensions.Hosting package
 
@@ -42,5 +43,7 @@ app.MapGet("/", () =>
 });
 
 app.MapControllers();
+app.UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
+// https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Exporter.Prometheus.AspNetCore/README.md
 
 app.Run(); // Run app without debugger to see output in console
