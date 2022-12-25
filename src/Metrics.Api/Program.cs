@@ -29,6 +29,7 @@ services
         x.SetResourceBuilder(resource);
         x.AddConsoleExporter();
         x.AddMeter(meterName);
+        x.AddRuntimeInstrumentation(); // Requires OpenTelemetry.Instrumentation.Runtime package
     })
     .StartWithHost(); // Requires OpenTelemetry.Extensions.Hosting package
 
