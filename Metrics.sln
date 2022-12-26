@@ -2,6 +2,16 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metrics.Api", "src\Metrics.Api\Metrics.Api.csproj", "{F3FF602A-1D97-40B2-997F-31C5E0B9C160}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{028BB6B9-5AD2-4432-886A-95068DB19210}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{4EE4D687-5599-4EC8-BC38-7B2305403122}"
+	ProjectSection(SolutionItems) = preProject
+		prometheus\prometheus.yml = prometheus\prometheus.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +22,8 @@ Global
 		{F3FF602A-1D97-40B2-997F-31C5E0B9C160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3FF602A-1D97-40B2-997F-31C5E0B9C160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3FF602A-1D97-40B2-997F-31C5E0B9C160}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EE4D687-5599-4EC8-BC38-7B2305403122} = {028BB6B9-5AD2-4432-886A-95068DB19210}
 	EndGlobalSection
 EndGlobal
