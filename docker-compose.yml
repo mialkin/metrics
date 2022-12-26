@@ -1,21 +1,14 @@
 version: "3.9"
 
-networks:
-  grafana:
-
 services:
   prometheus:
     image: prom/prometheus:v2.34.0
     volumes:
       - ./prometheus/:/etc/prometheus/
     ports:
-      - 9090:9090
-    networks:
-      - grafana
+      - "9090:9090"
 
   grafana:
     image: grafana/grafana:8.4.5
     ports:
-      - 3000:3000
-    networks:
-      - grafana
+      - "3000:3000"
