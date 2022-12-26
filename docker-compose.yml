@@ -11,9 +11,6 @@ services:
     image: prom/prometheus:v2.34.0
     volumes:
       - ./prometheus/:/etc/prometheus/
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--storage.tsdb.path=/prometheus"
     ports:
       - 9090:9090
     networks:
