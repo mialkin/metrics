@@ -3,9 +3,6 @@ version: "3.9"
 networks:
   grafana:
 
-volumes:
-  app_data: { }
-
 services:
   prometheus:
     image: prom/prometheus:v2.34.0
