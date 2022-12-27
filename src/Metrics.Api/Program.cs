@@ -27,7 +27,7 @@ services
     .WithMetrics(x =>
     {
         x.SetResourceBuilder(resourceBuilder);
-        x.AddConsoleExporter(); // Requires OpenTelemetry.Exporter.Console package
+        // x.AddConsoleExporter(); // Requires OpenTelemetry.Exporter.Console package
         x.AddPrometheusExporter(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
         x.AddMeter(meterName);
         // x.AddRuntimeInstrumentation(); // Requires OpenTelemetry.Instrumentation.Runtime package
