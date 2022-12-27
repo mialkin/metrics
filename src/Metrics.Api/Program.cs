@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +39,8 @@ var app = builder.Build();
 
 app.MapGet("/", () =>
 {
-    counter.Add(1);
+    counter.Add(1, new KeyValuePair<string, object?>("color", "red"));
+    counter.Add(2, new KeyValuePair<string, object?>("color", "orange"));
     histogram.Record(Random.Shared.Next(0, 100));
 });
 
