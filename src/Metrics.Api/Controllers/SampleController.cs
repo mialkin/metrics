@@ -5,7 +5,7 @@ namespace Metrics.Api.Controllers;
 
 [ApiController]
 [Route("home")]
-public class HomeController : ControllerBase
+public class SampleController : ControllerBase
 {
     [HttpGet("index")]
     public IActionResult Index()
