@@ -12,4 +12,10 @@ public class HomeController : ControllerBase
     {
         return Ok(DateTime.UtcNow);
     }
+
+    [HttpGet("gauge")]
+    public IActionResult Gauge(int instantValue)
+    {
+        return Ok(DateTime.UtcNow);
+    }
 }

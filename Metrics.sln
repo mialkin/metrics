@@ -4,7 +4,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metrics.Api", "src\Metrics.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{028BB6B9-5AD2-4432-886A-95068DB19210}"
 	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
+		docker-compose.infrastructure.yml = docker-compose.infrastructure.yml
+		Makefile = Makefile
+		.gitignore = .gitignore
+		.env.example = .env.example
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{4EE4D687-5599-4EC8-BC38-7B2305403122}"
