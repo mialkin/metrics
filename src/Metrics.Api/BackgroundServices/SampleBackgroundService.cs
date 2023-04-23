@@ -14,11 +14,19 @@ public class SampleBackgroundService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        const int seconds = 15;
+
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("Processing data. Current date: {Date}", DateTime.UtcNow);
+            _logger.LogInformation("Start processing data");
 
-            await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
+            var processingSeconds = Random.Shared.Next(2, 6);
+            await Task.Delay(TimeSpan.FromSeconds(processingSeconds), cancellationToken: stoppingToken);
+
+            _logger.LogInformation("End processing data. Took {ProcessingSeconds} seconds", processingSeconds);
+
+            _logger.LogInformation("Sleeping {Seconds} seconds", seconds);
+            await Task.Delay(TimeSpan.FromSeconds(seconds), stoppingToken);
         }
     }
 }

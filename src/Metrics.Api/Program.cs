@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using Metrics.Api.BackgroundServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry;
@@ -19,7 +20,7 @@ var services = builder.Services;
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
-// services.AddHostedService<SampleBackgroundService>();
+services.AddHostedService<SampleBackgroundService>();
 
 var resourceBuilder = ResourceBuilder.CreateDefault().AddService(serviceName: "Sample metrics service");
 const string meterName = "Aleksei's meter";
