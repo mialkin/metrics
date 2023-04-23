@@ -4,15 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Metrics.Api.Controllers;
 
 [ApiController]
-[Route("home")]
+[Route("sample")]
 public class SampleController : ControllerBase
 {
-    [HttpGet("index")]
-    public IActionResult Index()
-    {
-        return Ok(DateTime.UtcNow);
-    }
-
     [HttpGet("gauge")]
     public IActionResult Gauge(int instantValue)
     {
