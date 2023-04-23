@@ -8,12 +8,6 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using Serilog;
 
-var resourceBuilder = ResourceBuilder.CreateDefault().AddService(serviceName: "Sample metrics service");
-const string meterName = "Aleksei's meter";
-var meter = new Meter(name: meterName, version: "1.0"); // Think of a meter as of a container for all of your metrics
-var counter = meter.CreateCounter<long>(name: "Requests");
-var histogram = meter.CreateHistogram<long>(name: "RequestDuration");
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostBuilderContext, loggerConfiguration) => loggerConfiguration
     .WriteTo.Console()
@@ -22,6 +16,9 @@ builder.Host.UseSerilog((hostBuilderContext, loggerConfiguration) => loggerConfi
 var services = builder.Services;
 services.AddControllers();
 // services.AddHostedService<SampleBackgroundService>();
+
+var resourceBuilder = ResourceBuilder.CreateDefault().AddService(serviceName: "Sample metrics service");
+const string meterName = "Aleksei's meter";
 
 services
     .AddOpenTelemetry()
@@ -36,6 +33,10 @@ services
     .StartWithHost(); // Requires OpenTelemetry.Extensions.Hosting package
 
 var app = builder.Build();
+
+var meter = new Meter(name: meterName, version: "1.0"); // Think of a meter as of a container for all of your metrics
+var counter = meter.CreateCounter<long>(name: "Requests");
+var histogram = meter.CreateHistogram<long>(name: "RequestDuration");
 
 app.MapGet("/", () =>
 {
