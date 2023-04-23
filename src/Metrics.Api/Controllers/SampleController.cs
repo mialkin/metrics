@@ -1,4 +1,4 @@
-using System;
+using Metrics.Api.Metrics.Meters.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Metrics.Api.Controllers;
@@ -7,9 +7,18 @@ namespace Metrics.Api.Controllers;
 [Route("sample")]
 public class SampleController : ControllerBase
 {
-    [HttpGet("gauge")]
-    public IActionResult Gauge(int instantValue)
+    private readonly ISampleControllerMeter _sampleControllerMeter;
+
+    public SampleController(ISampleControllerMeter sampleControllerMeter) =>
+        _sampleControllerMeter = sampleControllerMeter;
+
+    [HttpGet("update-processing-time-seconds-gauge")]
+    public IActionResult Gauge(int seconds)
     {
-        return Ok(DateTime.UtcNow);
+        _sampleControllerMeter.UpdateProcessingTimeGauge(seconds);
+        
+        _sampleControllerMeter.IncrementRequestCounter();
+
+        return Ok();
     }
 }

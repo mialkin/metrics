@@ -14,4 +14,4 @@ Run `Metrics.Api` project in IDE and navigate to:
 Navigate to infrastructure's UI:
 
 - Prometheus at <http://localhost:6070>. Check targets at <http://localhost:6070/targets>
-- Grafana at <http://localhost:6080>.
+- Grafana at <http://localhost:6080>. Use <http://host.docker.internal:6070> as Prometheus' datasource URL.

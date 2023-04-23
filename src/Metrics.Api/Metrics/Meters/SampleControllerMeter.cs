@@ -13,10 +13,10 @@ public class SampleControllerMeter : ISampleControllerMeter
     {
         var meter = defaultMeterProvider.Meter;
 
-        _requestsCounter = meter.CreateCounter<long>("requests_total");
+        _requestsCounter = meter.CreateCounter<long>("sample_controller_requests_total");
 
         meter.CreateObservableGauge(
-            name: "processing_time_seconds",
+            name: "sample_controller_processing_time_seconds",
             observeValue: () => _processingTimeSeconds);
     }
 
