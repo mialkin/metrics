@@ -1,6 +1,8 @@
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using Metrics.Api.Metrics.Infrastructure;
+using Metrics.Api.Metrics.Meters;
+using Metrics.Api.Metrics.Meters.Interfaces;
 using Metrics.Api.Metrics.Miscellaneous;
 using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry;
@@ -17,18 +19,17 @@ public static class MetricsConfiguration
         var resourceBuilder = ResourceBuilder.CreateDefault().AddService(serviceName: assemblyName!);
         const string defaultMeterName = nameof(DefaultMeterProvider);
 
-        services
-            .AddOpenTelemetry()
+        services.AddOpenTelemetry()
             .WithMetrics(x =>
             {
                 x.SetResourceBuilder(resourceBuilder);
                 x.AddPrometheusExporter();
                 x.AddMeter(defaultMeterName);
                 x.AddView(
-                    instrumentName: SampleHistogram.InstrumentName,
+                    instrumentName: ResponseTimeHistogram.InstrumentName,
                     metricStreamConfiguration: new ExplicitBucketHistogramConfiguration
                     {
-                        Boundaries = SampleHistogram.Boundaries
+                        Boundaries = ResponseTimeHistogram.Boundaries
                     });
 
                 // x.AddConsoleExporter(); // Requires OpenTelemetry.Exporter.Console package
@@ -36,10 +37,18 @@ public static class MetricsConfiguration
             })
             .StartWithHost(); // Requires OpenTelemetry.Extensions.Hosting package
 
+        ConfigureMeters(services, defaultMeterName);
+    }
+
+    private static void ConfigureMeters(IServiceCollection services, string defaultMeterName)
+    {
         services.AddSingleton<IDefaultMeterProvider>(_ =>
         {
             var meter = new Meter(name: defaultMeterName, version: "1.0.0");
             return new DefaultMeterProvider(meter);
         });
+
+        services.AddSingleton<ISampleControllerMeter, SampleControllerMeter>();
+        services.AddSingleton<ISampleBackgroundServiceMeter, SampleBackgroundServiceMeter>();
     }
 }
