@@ -1,4 +1,4 @@
-namespace Metrics.Api.Metrics.Miscellaneous;
+namespace Metrics.Api.Metrics.Configuration;
 
 public static class ResponseTimeHistogram
 {

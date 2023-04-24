@@ -1,5 +1,5 @@
 using Metrics.Api.BackgroundServices;
-using Metrics.Api.Configuration;
+using Metrics.Api.Metrics.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;

@@ -3,13 +3,12 @@ using System.Reflection;
 using Metrics.Api.Metrics.Infrastructure;
 using Metrics.Api.Metrics.Meters;
 using Metrics.Api.Metrics.Meters.Interfaces;
-using Metrics.Api.Metrics.Miscellaneous;
 using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 
-namespace Metrics.Api.Configuration;
+namespace Metrics.Api.Metrics.Configuration;
 
 public static class MetricsConfiguration
 {
