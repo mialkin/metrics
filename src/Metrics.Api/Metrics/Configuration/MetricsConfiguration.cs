@@ -30,11 +30,7 @@ public static class MetricsConfiguration
                     {
                         Boundaries = ResponseTimeHistogram.Boundaries
                     });
-
-                // x.AddConsoleExporter(); // Requires OpenTelemetry.Exporter.Console package
-                // x.AddRuntimeInstrumentation(); // Requires OpenTelemetry.Instrumentation.Runtime package
-            })
-            .StartWithHost(); // Requires OpenTelemetry.Extensions.Hosting package
+            });
 
         ConfigureMeters(services, defaultMeterName);
     }
