@@ -4,7 +4,6 @@ using Metrics.Api.Metrics.Infrastructure;
 using Metrics.Api.Metrics.Meters;
 using Metrics.Api.Metrics.Meters.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 
@@ -18,11 +17,11 @@ public static class MetricsConfiguration
         var resourceBuilder = ResourceBuilder.CreateDefault().AddService(serviceName: assemblyName!);
         const string defaultMeterName = nameof(DefaultMeterProvider);
 
-        services.AddOpenTelemetry()
+        services.AddOpenTelemetry() // Requires OpenTelemetry.Extensions.Hosting
             .WithMetrics(x =>
             {
                 x.SetResourceBuilder(resourceBuilder);
-                x.AddPrometheusExporter();
+                x.AddPrometheusExporter(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore
                 x.AddMeter(defaultMeterName);
                 x.AddView(
                     instrumentName: ResponseTimeHistogram.InstrumentName,
